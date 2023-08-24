@@ -9,8 +9,14 @@ import org.springframework.kafka.config.TopicBuilder;
 public class KafkaTopicConfig {
 
     @Bean
-    public NewTopic madroidTopic() {
-        return TopicBuilder.name("madroid")
+    public NewTopic velibDataStationInfoTopic() {
+        return TopicBuilder.name("velibdata-station-info")
+                .build();
+    }
+
+    @Bean
+    public NewTopic velibDataStationStatusTopic() {
+        return TopicBuilder.name("velibdata-station-status")
                 .build();
     }
 }
