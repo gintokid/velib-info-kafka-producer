@@ -15,7 +15,7 @@ public class HttpUtil {
         con.setRequestProperty("Content-Type", "application/json");
 
         con.setDoOutput(true);
-        int status = con.getResponseCode();
+        con.getResponseCode();
 
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8));

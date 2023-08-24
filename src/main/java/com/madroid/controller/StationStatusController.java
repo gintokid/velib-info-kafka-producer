@@ -28,9 +28,6 @@ public class StationStatusController {
     @Autowired
     StationStateRepository repository;
 
-    private static final SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
-
-
     @GetMapping
     public ResponseEntity<?> getStations() {
         try {
