@@ -1,5 +1,6 @@
 package com.madroid;
 
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.madroid.util.HttpUtil;
@@ -13,10 +14,10 @@ import org.springframework.kafka.core.KafkaTemplate;
 import java.net.URL;
 
 @SpringBootApplication
-public class VelibDataKafkaApplication {
+public class VelibDataKafkaProduce {
 
     public static void main(String[] args) {
-        SpringApplication.run(VelibDataKafkaApplication.class, args);
+        SpringApplication.run(VelibDataKafkaProduce.class, args);
     }
 
     @Value("${opendata.velib.smove.url.station-info}")
@@ -37,6 +38,7 @@ public class VelibDataKafkaApplication {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode stationInfoNode = objectMapper.readTree(content.toString());
 
+            System.out.println("Sending info to topic velibdata-station-info...");
             kafkaTemplate.send("velibdata-station-info", stationInfoNode.toString());
 
             // Recuperation station status
@@ -46,6 +48,7 @@ public class VelibDataKafkaApplication {
             objectMapper = new ObjectMapper();
             JsonNode stationStatusNode = objectMapper.readTree(content.toString());
 
+            System.out.println("Sending info to topic velibdata-station-status...");
             kafkaTemplate.send("velibdata-station-status", stationStatusNode.toString());
 
         };
