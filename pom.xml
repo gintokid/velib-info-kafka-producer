@@ -4,9 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.madroid</groupId>
-        <artifactId>velibdata-parent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.15</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <artifactId>velibdata-kafka-produce</artifactId>
@@ -15,6 +16,7 @@
     <description>Velibdata with kafka</description>
     <properties>
         <java.version>11</java.version>
+        <start-class>com.madroid.VelibDataKafkaProduce</start-class>
     </properties>
 
     <dependencies>
