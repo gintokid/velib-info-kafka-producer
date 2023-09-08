@@ -26,6 +26,12 @@ public class VelibDataKafkaProduce {
     @Value("${opendata.velib.smove.url.station-status}")
     String stationStatusUrl;
 
+    @Value("${velibdata.kafka.topic.station-info}")
+    String velibDataInfoTopicName;
+
+    @Value("${velibdata.kafka.topic.station-status}")
+    String velibDataStatusTopicName;
+
     @Bean
     CommandLineRunner commandLineRunner(KafkaTemplate<String, String> kafkaTemplate) {
         return args -> {
@@ -39,7 +45,7 @@ public class VelibDataKafkaProduce {
             JsonNode stationInfoNode = objectMapper.readTree(content.toString());
 
             System.out.println("Sending info to topic velibdata-station-info...");
-            kafkaTemplate.send("velibdata-station-info", stationInfoNode.toString());
+            kafkaTemplate.send(velibDataInfoTopicName, stationInfoNode.toString());
 
             // Recuperation station status
             url = new URL(stationStatusUrl);
@@ -49,7 +55,9 @@ public class VelibDataKafkaProduce {
             JsonNode stationStatusNode = objectMapper.readTree(content.toString());
 
             System.out.println("Sending info to topic velibdata-station-status...");
-            kafkaTemplate.send("velibdata-station-status", stationStatusNode.toString());
+            kafkaTemplate.send(velibDataStatusTopicName, stationStatusNode.toString());
+
+            System.exit(0);
 
         };
     }
